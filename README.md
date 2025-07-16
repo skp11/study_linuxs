@@ -6,4 +6,5 @@
 
 ## Quests
 - Basic Linux Commands : [명령어](/codes/quests/10_basic_linux_commands.md)
-- MORE Basic Linuc Commands: [명령어](/codes/quests/10_basic_more_linux_commands.md)
+- MORE Basic Linuc Commands : [명령어](/codes/quests/10_basic_more_linux_commands.md)
+- Relative Path Commands : [명령어](/codes/quests/30_relative_path_commands.md)
