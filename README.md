@@ -12,3 +12,4 @@
 - Linux File Management Wildcard Practice: [명령어](/codes/quests/41_linux_file_management_wildcard_practice.md)
 - Linux Nano Practice Problems: [명령어](/codes/quests/50_linux_nano_practice_problems.md)
 - Linux Practice Problems: [명령어](/codes/quests/51_linux_practice_problems.md)
+- Linux Manage Permissions: [명령어](/codes/quests/52_linux_Manage-permissions.md)
