@@ -13,3 +13,4 @@
 - Linux Nano Practice Problems: [명령어](/codes/quests/50_linux_nano_practice_problems.md)
 - Linux Practice Problems: [명령어](/codes/quests/51_linux_practice_problems.md)
 - Linux Manage Permissions: [명령어](/codes/quests/52_linux_Manage-permissions.md)
+- Profiles Env: [명령어](/codes/quests/60_profiles_env.md)
