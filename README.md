@@ -14,3 +14,4 @@
 - Linux Practice Problems: [명령어](/codes/quests/51_linux_practice_problems.md)
 - Linux Manage Permissions: [명령어](/codes/quests/52_linux_Manage-permissions.md)
 - Profiles Env: [명령어](/codes/quests/60_profiles_env.md)
+- Useful Text Controls: [명령어](/codes/quests/71_useful_text_controls.md)
