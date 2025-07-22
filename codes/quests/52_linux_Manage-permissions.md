@@ -524,9 +524,75 @@ logout
 -   
 - 
 ```shell
-########################
-########################
-########################
+# (1) company/departments/dev/ 디렉터리와 모든 하위 파일: alice 소유, developers 그룹
+[root@localhost ~]# ls -l /permission_practice/company/departments/dev/
+total 16
+-rwxrwx---. 1 root developers 18 Jul 21 16:51 api.conf
+----r-x---. 1 root developers 32 Jul 21 16:51 build.sh
+-rwxrwx---. 1 root developers  0 Jul 21 16:51 config.py
+-rwxrwx---. 1 root developers 24 Jul 21 16:51 database.conf
+-rwxrw-r--. 1 root developers 22 Jul 21 17:11 main.py
+-rwxrwx---. 1 root developers  0 Jul 21 16:51 README.md
+-rwxrwx---. 1 root developers  0 Jul 21 16:51 test.py
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls -dl /permission_practice/company/departments/dev/
+drwxrwx---. 2 root developers 123 Jul 21 17:11 /permission_practice/company/departments/dev/
+[root@localhost ~]# chown -R alice:developers /permission_practice/company/departments/dev/
+[root@localhost ~]# ls -dl /permission_practice/company/departments/dev/
+drwxrwx---. 2 alice developers 123 Jul 21 17:11 /permission_practice/company/departments/dev/
+[root@localhost ~]# ls -l /permission_practice/company/departments/dev/
+total 16
+-rwxrwx---. 1 alice developers 18 Jul 21 16:51 api.conf
+----r-x---. 1 alice developers 32 Jul 21 16:51 build.sh
+-rwxrwx---. 1 alice developers  0 Jul 21 16:51 config.py
+-rwxrwx---. 1 alice developers 24 Jul 21 16:51 database.conf
+-rwxrw-r--. 1 alice developers 22 Jul 21 17:11 main.py
+-rwxrwx---. 1 alice developers  0 Jul 21 16:51 README.md
+-rwxrwx---. 1 alice developers  0 Jul 21 16:51 test.py
+
+
+
+# (2) company/departments/hr/ 디렉터리와 모든 하위 파일: diana 소유, managers 그룹
+[root@localhost ~]# ls -l /permission_practice/company/departments/hr/
+total 4
+-rw-r--r--. 1 root root  0 Jul 21 16:51 contracts.pdf
+-rw-r--r--. 1 root root  0 Jul 21 16:51 employees.xlsx
+-rw-r--r--. 1 root root  0 Jul 21 16:51 policies.txt
+-rwSr--r--. 1 root root 25 Jul 21 16:51 salaries.txt
+[root@localhost ~]# ls -ld /permission_practice/company/departments/hr/
+drwxr-xr-x. 2 root root 89 Jul 21 16:51 /permission_practice/company/departments/hr/
+[root@localhost ~]# chown -R diana:managers /permission_practice/company/departments/hr/
+[root@localhost ~]# ls -l /permission_practice/company/departments/hr/
+total 4
+-rw-r--r--. 1 diana managers  0 Jul 21 16:51 contracts.pdf
+-rw-r--r--. 1 diana managers  0 Jul 21 16:51 employees.xlsx
+-rw-r--r--. 1 diana managers  0 Jul 21 16:51 policies.txt
+-rw-r--r--. 1 diana managers 25 Jul 21 16:51 salaries.txt
+[root@localhost ~]# ls -ld /permission_practice/company/departments/hr/
+drwxr-xr-x. 2 diana managers 89 Jul 21 16:51 /permission_practice/company/departments/hr/
+
+
+
+
+# (3) shared/tools/ 디렉터리와 모든 하위 파일: root 소유, developers 그룹
+[root@localhost ~]# ls -l /permission_practice/shared/tools/
+total 8
+-rw-r--r--. 1 root root       33 Jul 21 16:51 backup.sh
+-rw-r-Sr--. 1 root developers 37 Jul 21 16:51 deploy.sh
+[root@localhost ~]# ls -ld /permission_practice/shared/tools/
+dr--r-xr--. 2 root developers 40 Jul 21 16:51 /permission_practice/shared/tools/
+[root@localhost ~]# chown -R root:developers /permission_practice/shared/tools/
+[root@localhost ~]# ls -l /permission_practice/shared/tools/
+total 8
+-rw-r--r--. 1 root developers 33 Jul 21 16:51 backup.sh
+-rw-r-Sr--. 1 root developers 37 Jul 21 16:51 deploy.sh
+[root@localhost ~]# ls -ld /permission_practice/shared/tools/
+dr--r-xr--. 2 root developers 40 Jul 21 16:51 /permission_practice/shared/tools/
+
+
+
+
 ```
 
   ### **4-2. 그룹 전용 변경**
@@ -542,9 +608,24 @@ logout
 -   
 -   
 ```shell
-########################
-########################
-########################
+# (1) company/projects/: managers 그룹으로 변경
+[root@localhost ~]# ls -ld /permission_practice/company/projects/
+drwxr-xr-x. 5 root root 57 Jul 21 16:51 /permission_practice/company/projects/
+[root@localhost ~]# chgrp managers /permission_practice/company/projects/
+[root@localhost ~]# ls -ld /permission_practice/company/projects/
+drwxr-xr-x. 5 root managers 57 Jul 21 16:51 /permission_practice/company/projects/
+
+
+# (2) backup/daily/: developers 그룹으로 변경
+[root@localhost ~]# ls -ld /permission_practice/backup/daily/
+drwxr-xr-x. 2 root root 60 Jul 21 16:51 /permission_practice/backup/daily/
+[root@localhost ~]# chown :developers /permission_practice/backup/daily/
+[root@localhost ~]# ls -ld /permission_practice/backup/daily/
+drwxr-xr-x. 2 root developers 60 Jul 21 16:51 /permission_practice/backup/daily/
+
+
+
+
 ```    
   ---
 
@@ -606,9 +687,34 @@ logout
 -   
 - 
 ```shell
-########################
-########################
-########################
+# (1) shared/tools/deploy.sh: developers 그룹만 실행 가능
+[root@localhost ~]# ls -l /permission_practice/shared/tools/deploy.sh 
+-rw-r-Sr--. 1 root developers 37 Jul 21 16:51 /permission_practice/shared/tools/deploy.sh
+[root@localhost ~]# chmod 050 /permission_practice/shared/tools/deploy.sh 
+[root@localhost ~]# ls -l /permission_practice/shared/tools/deploy.sh 
+----r-x---. 1 root developers 37 Jul 21 16:51 /permission_practice/shared/tools/deploy.sh
+
+
+# (2) shared/tools/backup.sh: alice와 diana만 실행 가능
+[root@localhost ~]# ls -l /permission_practice/shared/tools/backup.sh 
+-rw-r--r--. 1 root developers 33 Jul 21 16:51 /permission_practice/shared/tools/backup.sh
+[root@localhost ~]# chown :managers /permission_practice/shared/tools/backup.sh 
+[root@localhost ~]# ls -l /permission_practice/shared/tools/backup.sh 
+-rw-r--r--. 1 root managers 33 Jul 21 16:51 /permission_practice/shared/tools/backup.sh
+[root@localhost ~]# chmod 050 /permission_practice/shared/tools/backup.sh 
+[root@localhost ~]# ls -l /permission_practice/shared/tools/backup.sh 
+----r-x---. 1 root managers 33 Jul 21 16:51 /permission_practice/shared/tools/backup.sh
+
+
+# (3) company/departments/dev/build.sh: 소유자만 실행 가능
+[root@localhost ~]# ls -l /permission_practice/company/departments/dev/build.sh 
+----r-x---. 1 alice developers 32 Jul 21 16:51 /permission_practice/company/departments/dev/build.sh
+[root@localhost ~]# chmod 500 /permission_practice/company/departments/dev/build.sh 
+[root@localhost ~]# ls -l /permission_practice/company/departments/dev/build.sh 
+-r-x------. 1 alice developers 32 Jul 21 16:51 /permission_practice/company/departments/dev/build.sh
+
+
+
 ```
 
   ### **8-2. 시스템 스크립트 보안 설정**
@@ -690,9 +796,41 @@ logout
 -   
 -   
 ```shell
-########################
-########################
-########################
+# (1) backup/daily/ : developers 그룹이 백업 생성 가능, 읽기 전용
+[root@localhost ~]# ls -ld /permission_practice/backup/daily
+drwxr-xr-x. 2 root developers 60 Jul 21 16:51 /permission_practice/backup/daily
+[root@localhost ~]# chmod 750 /permission_practice/backup/daily/
+[root@localhost ~]# ls -ld /permission_practice/backup/daily
+drwxr-x---. 2 root developers 60 Jul 21 16:51 /permission_practice/backup/daily
+
+
+# (2) backup/weekly/ : managers만 접근 가능
+[root@localhost ~]# ls -ld /permission_practice/backup/weekly/
+drwxr-xr-x. 2 root root 6 Jul 21 16:51 /permission_practice/backup/weekly/
+[root@localhost ~]# chgrp managers /permission_practice/backup/weekly/
+[root@localhost ~]# ls -ld /permission_practice/backup/weekly/
+drwxr-xr-x. 2 root managers 6 Jul 21 16:51 /permission_practice/backup/weekly/
+[root@localhost ~]# chmod 750 /permission_practice/backup/weekly/
+[root@localhost ~]# ls -ld /permission_practice/backup/weekly/
+drwxr-x---. 2 root managers 6 Jul 21 16:51 /permission_practice/backup/weekly/
+
+
+# (3) backup/monthly/ : root만 접근 가능
+[root@localhost ~]# ls -ld /permission_practice/backup/monthly/
+drwxr-xr-x. 2 root root 6 Jul 21 16:51 /permission_practice/backup/monthly/
+[root@localhost ~]# chmod 700 /permission_practice/backup/monthly/
+[root@localhost ~]# ls -ld /permission_practice/backup/monthly/
+drwx------. 2 root root 6 Jul 21 16:51 /permission_practice/backup/monthly/
+
+
+# (4) 모든 백업 파일은 생성 후 읽기 전용으로 자동 변경
+############
+############
+############
+
+
+
+
 ```    
   ---
 
