@@ -16,3 +16,4 @@
 - Profiles Env: [명령어](/codes/quests/60_profiles_env.md)
 - Useful Text Controls: [명령어](/codes/quests/71_useful_text_controls.md)
 - Shell Variables Argument: [명령어](/codes/quests/80_1_shell_variables_aguments.md)
+- Shell Variables Read: [명령어](/codes/quests/80_2_shell_variables_read.md)
