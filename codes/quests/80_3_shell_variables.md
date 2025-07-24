@@ -142,7 +142,23 @@ bash count\_keyword.sh error logfile.txt
 The word 'error' appeared 5 times.
 
 ```shell
+# 셸 스크립트
+#!/bin/bash
 
+KEYWORD="$1"
+FILENAME="$2"
+
+#WORD_COUNT=$(grep -i $KEYWORD $FILENAME | tr -cs "a-zA-Z" "\n" | sort | uniq -c | grep -i $KEYWORD | awk '{print $1}')
+
+WORD_COUNT=$(grep -o -i "error" logfile.txt | wc -l)
+
+echo "The word $KEYWORD appeared $WORD_COUNT times."
+```
+
+```shell
+# 스크립트 실행
+[skp@localhost ~/shell_practice/env]$ bash count_keyword.sh error logfile.txt
+The word error appeared 3 times.
 ```
 
 
@@ -170,6 +186,53 @@ bash unique\_words.sh
 Enter input file: article.txt
 
 Unique words saved to: article\_unique.txt
+
+```shell
+# 셸 스크립트
+#!/bin/bash
+
+read -p "Filename: " FILENAME
+
+if [ ! -f "$FILENAME" ]
+then
+        echo "파일이 존재하지 않습니다."
+        exit 1
+fi
+
+
+UNIQUE_WORD_LIST=$(tr -cs "a-zA-Z" "\n" < "$FILENAME" | sort | uniq)
+
+
+NEW_FILENAME="${FILENAME%.*}_unique.txt"
+
+echo "$UNIQUE_WORD_LIST" > "$NEW_FILENAME"
+```
+
+```shell
+# 스크립트 실행
+[skp@localhost ~/shell_practice/env]$ bash unique_words.sh
+Filename: article.txt
+[skp@localhost ~/shell_practice/env]$ cat article_unique.txt 
+an
+and
+automation
+developers
+embedded
+for
+is
+Linux
+Many
+open
+operating
+popular
+programming
+servers
+source
+system
+systems
+use
+```
+
 
 ---
 
