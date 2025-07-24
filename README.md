@@ -19,3 +19,4 @@
 - Shell Variables Read: [명령어](/codes/quests/80_2_shell_variables_read.md)
 - Shell Variables: [명령어](/codes/quests/80_3_shell_variables.md)
 - SSH Vims: [명령어](/codes/quests/10_2_ssh_vims.md)
+- SSH With Shell: [명령어](/codes/quests/10_3_ssh_withshell.md)
