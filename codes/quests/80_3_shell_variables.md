@@ -256,6 +256,40 @@ bash compare\_lastline.sh file1.txt file2.txt
 
 Result: Different
 
+```shell
+# 셸 스크립트
+#!/bin/bash
+
+first_file="$1"
+second_file="$2"
+
+if [ ! -f "$first_file" ] || [ ! -f "$second_file" ]
+then
+        echo "파일이 존재하지 않습니다."
+        exit 1
+fi
+
+
+first_file_last=$(tail -n 1 < "${first_file}")
+second_file_last=$(tail -n 1 < "${second_file}")
+
+
+if [ "$first_file_last" != "$second_file_last" ]
+then    
+        echo "Result: Different"
+else    
+        echo "Result: Same"
+fi      
+```
+
+```shell
+# 스크립트 실행
+[skp@localhost ~/shell_practice/env]$ bash compare_lastline.sh file1.txt file2.txt
+Result: Different
+```
+
+
+
 ---
 
 ### **✅ \[문제 5\] 이메일 리스트 정제 및 카운트**
@@ -285,6 +319,35 @@ Output:
 3 naver.com
 
 2 daum.net
+
+
+```shell
+# 셸 스크립트
+#!/bin/bash
+
+read -p "Enter file name: " FILENAME
+
+if [ ! -f "$FILENAME" ]
+then
+        echo "파일이 존재하지 않습니다."
+        exit 1
+fi
+
+result=$(grep -oE "[[:alnum:]._-]+@[[:alnum:]._-]+" $FILENAME | cut -d"@" -f2 | sort | uniq -c | sort -r)
+
+echo "$result"
+```
+
+```shell
+# 스크립트 실행
+[skp@localhost ~/shell_practice/env]$ bash email_domains.sh
+Enter file name: people.txt
+      3 naver.com
+      3 gmail.com
+      2 daum.net
+```
+
+
 
 ---
 
@@ -317,5 +380,41 @@ Output:
 30 and  
 
 20 python  
+
+```shell
+# 셸 스크립트
+#!/bin/bash
+
+read -p "Enter file to process: " filename
+
+result=$(tr -cs "a-zA-Z" "\n" < $filename | tr "A-Z" "a-z" | sort | uniq -c | sort)
+
+echo "$result"
+```
+
+```shell
+# 스크립트 실행
+[skp@localhost ~/shell_practice/env]$ bash word_freq_sort.sh
+Enter file to process: article.txt
+      1 an
+      1 automation
+      1 developers
+      1 embedded
+      1 many
+      1 open
+      1 operating
+      1 popular
+      1 programming
+      1 servers
+      1 source
+      1 system
+      1 systems
+      1 use
+      2 and
+      2 for
+      2 is
+      3 linux
+```
+
 
 ...
