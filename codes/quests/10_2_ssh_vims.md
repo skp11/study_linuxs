@@ -115,8 +115,6 @@ Elderberry
 ✅ 명령어 힌트: `:%s///`, `yy`, `p`, `:wq`
 
 ```shell
-
-```
 [jeongho@192.168.0.47 ~]$ cd vim_crud_practice/comp3/
 [jeongho@192.168.0.47 ~/vim_crud_practice/comp3]$ vim users.csv 
 [jeongho@192.168.0.47 ~/vim_crud_practice/comp3]$ cat users.csv 
@@ -126,6 +124,8 @@ Jane Doe,jane@example.com
 john.doe@gmail.com
 john.doe@gmail.com
 john.doe@gmail.com
+```
+
 ---
 
 ### **🔹 실습 4\. (중상: Delete & Navigation) – comp1/fruits.txt**
